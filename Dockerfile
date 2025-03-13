@@ -18,7 +18,7 @@ RUN apk add --no-cache curl wget nftables tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo Asia/Shanghai > /etc/timezone && apk del tzdata \
     && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh && (echo "1"; sleep 2; echo "1"; sleep 2; echo "1"; sleep 2; echo "1") | sh install.sh \
-    && source /etc/profile &> /dev/null && (echo "2"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "https://suo.yt/c38ZBHG"; sleep 2; echo "1"; sleep 5; echo "1"; sleep 5; echo "0") | /etc/ShellCrash/menu.sh && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash
+    && source /etc/profile &> /dev/null && (echo "2"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "https://suo.yt/c38ENDE"; sleep 2; echo "1"; sleep 5; echo "1"; sleep 5; echo "0") | /etc/ShellCrash/menu.sh && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash
 
 # 映射端口
 EXPOSE 7890
