@@ -8,7 +8,7 @@ LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ"
 WORKDIR /root
 
 # 将 shellcrash.sh 文件添加到镜像中的 /root 目录
-ADD shellcrash.sh /root/shellcrash.sh
+COPY shellcrash.sh /root/shellcrash.sh
 
 # 设置脚本的可执行权限
 RUN chmod +x /root/shellcrash.sh
@@ -17,8 +17,8 @@ RUN chmod +x /root/shellcrash.sh
 RUN apk add --no-cache curl wget nftables tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo Asia/Shanghai > /etc/timezone && apk del tzdata \
-    && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh && (echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "1") | sh install.sh \
-    && source /etc/profile &> /dev/null && (echo "2"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "https://dler.cloud/subscribe/xT9BmPY5ueoDAtIsdSCH?clash=trojan&lv=1"; sleep 2; echo "1"; sleep 5; echo "1"; sleep 5; echo "0"; echo "2"; sleep 2; echo "1"; sleep 2; echo "1"; sleep 2; echo "7"; sleep 2; echo "4"; sleep 2; echo "0"; sleep 2; echo "0"; sleep 2; echo "1"; sleep 2; echo "0") | /etc/ShellCrash/menu.sh && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash
+    && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh && (echo "1"; sleep 2; echo "1"; sleep 2; echo "1"; sleep 2; echo "1") | sh install.sh \
+    && source /etc/profile &> /dev/null && (echo "2"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "https://suo.yt/c38ZBHG"; sleep 2; echo "1"; sleep 5; echo "1"; sleep 5; echo "0") | /etc/ShellCrash/menu.sh && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash
 
 # 映射端口
 EXPOSE 7890
