@@ -13,25 +13,12 @@ COPY shellcrash.sh /root/shellcrash.sh
 # 设置脚本的可执行权限
 RUN chmod +x /root/shellcrash.sh
 
-# 安装必要的工具设置时区
-RUN apk add --no-cache curl wget nftables tzdata \
+# 安装必要的工具设置系统时间
+RUN apk add --no-cache curl wget tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo Asia/Shanghai > /etc/timezone \
-    && apk del tzdata
-
-# 下载并解压 ShellCrash
-RUN wget -O /tmp/ShellCrash.tar.gz https://github.com/juewuy/ShellCrash/releases/download/1.9.0/ShellCrash.tar.gz \
-    && mkdir -p /tmp/SC_tmp \
-    && tar -zxf /tmp/ShellCrash.tar.gz -C /tmp/SC_tmp/
-
-# 执行初始化脚本
-RUN /bin/sh /tmp/SC_tmp/init.sh --install-dir /tmp/ShellCrash
-
-# 执行菜单脚本
-RUN /etc/ShellCrash/menu.sh
-
-# 清理步骤
-RUN rm -rf /tmp/ShellCrash.tar.gz /tmp/SC_tmp
+    && echo Asia/Shanghai > /etc/timezone && apk del tzdata \
+    && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh && (echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "1") | sh install.sh \
+    && source /etc/profile &> /dev/null && (echo "2"; sleep 2; echo "0"; sleep 2; echo "1"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "https://suo.yt/MQazzkQ"; sleep 2; echo "1"; sleep 5; echo "1"; sleep 5; echo "0") | /etc/ShellCrash/menu.sh && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash
 
 # 映射端口
 EXPOSE 7890
