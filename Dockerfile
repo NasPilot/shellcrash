@@ -16,10 +16,17 @@ RUN chmod +x /root/shellcrash.sh
 # 修改系统时间
 RUN apk add --no-cache curl wget nftables tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo Asia/Shanghai > /etc/timezone && apk del tzdata \
-    && wget -O /tmp/ShellCrash.tar.gz https://github.com/juewuy/ShellCrash/releases/download/1.9.0/ShellCrash.tar.gz && mkdir -p /tmp/SC_tmp && tar -zxf '/tmp/ShellCrash.tar.gz' -C /tmp/SC_tmp/ && source /tmp/SC_tmp/init.sh \
-    && source /etc/profile &> /dev/null && (echo "2"; sleep 2; echo "0"; sleep 2; echo "1"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "https://suo.yt/MQazzkQ"; sleep 2; echo "1"; sleep 5; echo "1"; sleep 5; echo "0") | /etc/ShellCrash/menu.sh && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash
-
+    && echo Asia/Shanghai > /etc/timezone \
+    && apk del tzdata \
+    && wget -O /tmp/ShellCrash.tar.gz https://github.com/juewuy/ShellCrash/releases/download/1.9.0/ShellCrash.tar.gz \
+    && mkdir -p /tmp/SC_tmp \
+    && tar -zxf /tmp/ShellCrash.tar.gz -C /tmp/SC_tmp/ \
+    && /bin/sh /tmp/SC_tmp/init.sh \
+    && /etc/profile >/dev/null 2>&1 \
+    && (echo "2"; sleep 2; echo "0"; sleep 2; echo "1"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "https://suo.yt/MQazzkQ"; sleep 2; echo "1"; sleep 5; echo "1"; sleep 5; echo "0") | /etc/ShellCrash/menu.sh \
+    && mv /etc/ShellCrash /etc/ShellCrash_bak \
+    && mkdir /etc/ShellCrash \
+    && rm -rf /tmp/ShellCrash.tar.gz /tmp/SC_tmp
 # 映射端口
 EXPOSE 7890
 EXPOSE 9999
