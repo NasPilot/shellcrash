@@ -13,8 +13,7 @@ ENV TZ=Asia/Shanghai
 COPY shellcrash.sh /root/shellcrash.sh
 
 # 设置脚本的可执行权限
-RUN chmod +x /root/shellcrash.sh && \
-    chmod +x /usr/local/bin/install_crash.sh
+RUN chmod +x /root/shellcrash.sh
 
 # 安装必要的软件包
 RUN apk add --no-cache curl wget nftables tzdata \
