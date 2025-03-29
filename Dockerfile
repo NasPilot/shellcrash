@@ -23,22 +23,15 @@ RUN set -ex \
     && apk del tzdata \
     && export url='https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master' \
     && wget -q --no-check-certificate -O /tmp/install.sh $url/install.sh \
-    && (echo "1"; sleep 1; echo "1"; sleep 1; echo "1"; sleep 1; echo "1") | sh /tmp/install.sh \
-    && source /etc/profile &> /dev/null \
-    && (echo "1"; sleep 1; \
-        echo "1"; sleep 1; \
-        echo "2"; sleep 1; \
-        echo "1"; sleep 1; \
-        echo "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml"; sleep 1; \
-        echo "1"; sleep 1; \
-        echo "1"; sleep 1; \
-        echo "0"; echo "2"; sleep 1; \
-        echo "1"; sleep 1; \
-        echo "1"; sleep 1; echo "7"; sleep 1; \
-        echo "4"; sleep 1; \
-        echo "0"; sleep 1; \
-        echo "0"; sleep 1; \
-        echo "1"; sleep 1) | /etc/ShellCrash/menu.sh \
+    # 安装 ShellCrash
+    && printf "1\n1\n1\n1\n" | sh /tmp/install.sh \
+    && . /etc/profile \
+    # 创建配置目录
+    && mkdir -p /etc/ShellCrash/yamls \
+    # 下载并配置文件
+    && wget -q --no-check-certificate -O /etc/ShellCrash/configs/ShellCrash.yaml https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml \
+    # 配置 ShellCrash（选择Linux设备模式并完成初始化配置）
+    && printf "2\n1\n1\n1\n1\n1\n0\n" | /etc/ShellCrash/menu.sh \
     && rm -rf /tmp/* /var/cache/apk/*
 
 # 端口映射
@@ -48,5 +41,8 @@ EXPOSE 7890 9999
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
     CMD wget --no-check-certificate -q -O - http://localhost:9999/version || exit 1
 
+# 备份初始配置
+RUN cp -r /etc/ShellCrash /etc/ShellCrash_bak
+
 # 启动命令
-ENTRYPOINT ["sh","/etc/ShellCrash/start.sh","start","2"]
+ENTRYPOINT ["sh", "shellcrash.sh"]
