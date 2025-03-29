@@ -27,7 +27,7 @@ RUN apk add --no-cache curl wget nftables tzdata \
         echo "1"; sleep 3; \
         echo "2"; sleep 2; \
         echo "1"; sleep 1; \
-        echo "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml"; sleep 2; \
+        echo "https://suo.yt/EeCE6z4"; sleep 2; \
         echo "1"; sleep 5; \
         echo "1"; sleep 120; \
         echo "0"; echo "2"; sleep 2; \
@@ -49,5 +49,5 @@ EXPOSE 9999
 ENV ENV="/etc/profile"
 
 #启动命令
-#ENTRYPOINT ["sh","shellcrash.sh"]
-ENTRYPOINT ["sh","/etc/ShellCrash/start.sh start 2"]
+ENTRYPOINT ["sh","shellcrash.sh"]
+#ENTRYPOINT ["sh","/etc/ShellCrash/start.sh start 2"]
