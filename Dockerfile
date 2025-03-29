@@ -57,4 +57,5 @@ EXPOSE 9999
 ENV ENV="/etc/profile"
 
 #启动命令
-ENTRYPOINT ["sh","shellcrash.sh"]
+#ENTRYPOINT ["sh","shellcrash.sh"]
+ENTRYPOINT ["sh","/etc/ShellCrash/start.sh start 2"]
