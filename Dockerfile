@@ -2,9 +2,7 @@
 FROM alpine:latest
 
 # 作者信息
-LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ" \
-      version="1.9.2" \
-      description="ShellCrash Docker Image"
+LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ"
 
 # 工作目录和环境变量设置
 WORKDIR /root
@@ -17,7 +15,7 @@ RUN chmod +x /root/shellcrash.sh
 
 # 安装必要的软件包并配置
 RUN set -ex \
-    && apk add --no-cache curl wget nftables tzdata \
+    && apk add --no-cache curl wget nftables tzdata ca-certificates \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
     && apk del tzdata \
