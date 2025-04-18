@@ -14,33 +14,32 @@ COPY shellcrash.sh /root/shellcrash.sh
 RUN chmod +x /root/shellcrash.sh
 
 # 安装必要的软件包并配置
-RUN set -ex \
-    && apk add --no-cache curl wget nftables tzdata ca-certificates \
+RUN apk add --no-cache curl wget nftables tzdata ca-certificates \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
     && apk del tzdata \
-    && export url='https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master' \
-    && wget -q --no-check-certificate -O /tmp/install.sh $url/install.sh \
-    # 安装 ShellCrash
-    && printf "1\n1\n1\n1\n" | sh /tmp/install.sh \
-    && . /etc/profile \
-    # 创建配置目录
-    && mkdir -p /etc/ShellCrash/yamls \
-    # 下载并配置文件
-    && wget -q --no-check-certificate -O /etc/ShellCrash/configs/ShellCrash.yaml https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml \
-    # 配置 ShellCrash（选择Linux设备模式并完成初始化配置）
-    && printf "2\n1\n1\n1\n1\n1\n0\n" | /etc/ShellCrash/menu.sh \
+    && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
+    && (echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "1") | sh install.sh \
+    && source /etc/profile &> /dev/null
+
+# 安装 ShellCrash
+RUN (echo "2"; sleep 2; \
+    echo "0"; sleep 2; \
+    echo "1"; sleep 2; \
+    echo "1"; sleep 2; \
+    echo "2"; sleep 2; \
+    echo "1"; sleep 2; \
+    echo "https://suo.yt/kLxRjoY"; sleep 5; \
+    echo "1"; sleep 5; \
+    echo "1"; sleep 5; \
+    echo "0") | /etc/ShellCrash/menu.sh \
     && rm -rf /tmp/* /var/cache/apk/*
-
-# 端口映射
-EXPOSE 7890 9999
-
-# 健康检查
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-    CMD wget --no-check-certificate -q -O - http://localhost:9999/version || exit 1
 
 # 备份初始配置
 RUN cp -r /etc/ShellCrash /etc/ShellCrash_bak
+
+# 端口映射
+EXPOSE 7890 9999
 
 # 启动命令
 ENTRYPOINT ["sh", "shellcrash.sh"]
