@@ -19,16 +19,16 @@ RUN apk add --no-cache curl wget nftables tzdata ca-certificates \
     && echo ${TZ} > /etc/timezone \
     && apk del tzdata \
     && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
-    && (echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "1") | sh install.sh \
+    && (echo "1"; sleep 5; echo "2"; sleep 5; echo "1"; sleep 5; echo "1") | sh install.sh \
     && source /etc/profile &> /dev/null
 
 # 安装 ShellCrash
-RUN (echo "2"; sleep 2; \
-    echo "0"; sleep 2; \
-    echo "1"; sleep 2; \
-    echo "1"; sleep 2; \
-    echo "2"; sleep 2; \
-    echo "1"; sleep 2; \
+RUN (echo "2"; sleep 5; \
+    echo "0"; sleep 5; \
+    echo "1"; sleep 5; \
+    echo "1"; sleep 5; \
+    echo "2"; sleep 5; \
+    echo "1"; sleep 5; \
     echo "https://suo.yt/kLxRjoY"; sleep 5; \
     echo "1"; sleep 5; \
     echo "1"; sleep 5; \

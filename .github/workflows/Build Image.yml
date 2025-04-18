@@ -45,3 +45,4 @@ jobs:                     # workflow中的job
           cache-to: type=registry,ref=naspilot/shellcrash:buildcache,mode=max
           provenance: false                                     # 关闭 provenance 以减少构建时间
           outputs: type=registry                                # 优化输出设置
+          progress: plain                                       # 显示构建进度
