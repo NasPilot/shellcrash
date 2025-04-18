@@ -31,24 +31,20 @@ RUN set -ex \
         (echo "1"; sleep 1; \
          echo "1"; sleep 1; \
          echo "1"; sleep 1; \
-         echo "1") | sh /tmp/install.sh \
+         echo "1"; sleep 1) | sh /tmp/install.sh \
         ' \
     && source /etc/profile &> /dev/null \
     && timeout 300 bash -c '\
-        (echo "1"; sleep 1; \
+        (echo "2"; sleep 1; \
          echo "1"; sleep 1; \
-         echo "2"; sleep 1; \
+         echo "1"; sleep 1; \
          echo "1"; sleep 1; \
          echo "https://suo.yt/kLxRjoY"; sleep 2; \
          echo "1"; sleep 2; \
          echo "1"; sleep 2; \
-         echo "0"; echo "2"; sleep 1; \
          echo "1"; sleep 1; \
-         echo "1"; sleep 1; echo "7"; sleep 1; \
-         echo "4"; sleep 1; \
-         echo "0"; sleep 1; \
-         echo "0"; sleep 1; \
-         echo "1") | /etc/ShellCrash/menu.sh \
+         echo "1"; sleep 1; \
+         echo "0") | /etc/ShellCrash/menu.sh \
         ' \
     && rm -rf /tmp/* /var/cache/apk/* /var/tmp/* \
     && [ -f /etc/ShellCrash/menu.sh ] || exit 1
