@@ -33,16 +33,20 @@ jobs:                     # workflow中的job
           password: ${{ secrets.DOCKER_PASSWORD }}              # DockerHub 的Token
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4                       # 执行docker镜像生成并推送到DockerHub
+        uses: docker/build-push-action@v4
         if: startsWith(github.repository, 'NasPilot/shellcrash')
         with:
           context: .
-          file: ./Dockerfile                                    # Dockerfile文件的名称
-          platforms: linux/amd64,linux/arm64                    # Docker准备构建的镜像平台
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
           push: true
-          tags: naspilot/shellcrash:latest                      # Docker镜像标签
-          cache-from: type=registry,ref=naspilot/shellcrash:buildcache  # 启用缓存
+          tags: |
+            naspilot/shellcrash:latest
+            naspilot/shellcrash:${{ github.sha }}
+          cache-from: type=registry,ref=naspilot/shellcrash:buildcache
           cache-to: type=registry,ref=naspilot/shellcrash:buildcache,mode=max
-          provenance: false                                     # 关闭 provenance 以减少构建时间
-          outputs: type=registry                                # 优化输出设置
-          progress: plain                                       # 显示构建进度
+          provenance: false
+          outputs: type=registry
+          progress: plain
+          no-cache: false
+          pull: true
