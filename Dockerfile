@@ -7,22 +7,15 @@ LABEL version="1.9.0"
 
 WORKDIR /root
 
-# 复制本地安装包和配置文件
+# 复制启动脚本到/root目录
 COPY shellcrash.sh /root/
-COPY ShellCrash.tar.gz /tmp/
-COPY config.yaml /tmp/
 
-# 设置时区并安装ShellCrash
-RUN apk add --no-cache curl wget tzdata \
+# 安装必要的软件包并配置
+RUN apk add --no-cache curl wget tzdata  nftables \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo Asia/Shanghai > /etc/timezone && apk del tzdata \
-    && mkdir -p /tmp/SC_tmp \
-    && tar -zxf '/tmp/ShellCrash.tar.gz' -C /tmp/SC_tmp/ \
-    && (echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "1") | sh /tmp/SC_tmp/install.sh \
-    && source /etc/profile > /dev/null \
-    && (echo "2"; sleep 2; echo "0"; sleep 2; echo "1"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "3"; sleep 2; echo "1"; sleep 5; echo "0") | /etc/ShellCrash/menu.sh \
-    && mv /etc/ShellCrash /etc/ShellCrash_bak \
-    && mkdir /etc/ShellCrash
+    && wget https://raw.githubusercontent.com/NasPilot/shellcrash/stable/install.sh && (echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "1") | sh install.sh \
+    && source /etc/profile &> /dev/null && (echo "2"; sleep 2; echo "0"; sleep 2; echo "1"; sleep 2; echo "1"; sleep 2; echo "2"; sleep 2; echo "1"; sleep 2; echo "https://suo.yt/MaxjTyR"; sleep 2; echo "1"; sleep 5; echo "1"; sleep 5; echo "0") | /etc/ShellCrash/menu.sh && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash
 
 # 端口映射
 EXPOSE 7890 9999

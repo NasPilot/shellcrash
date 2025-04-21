@@ -1,7 +1,7 @@
 #! /bin/bash
 # Copyright (C) Juewuy
 
-[ -z "$url" ] && url="https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master"
+[ -z "$url" ] && url="https://fastly.jsdelivr.net/gh/NasPilot/shellcrash@stable"
 type bash &>/dev/null && shtype=bash || shtype=sh 
 echo='echo -e' 
 [ -n "$(echo -e|grep e)" ] && {
@@ -44,7 +44,7 @@ webget(){
 	fi
 }
 error_down(){
-	$echo "请参考 \033[32mhttps://github.com/juewuy/ShellCrash/blob/master/README_CN.md"
+	$echo "请参考 \033[32mhttps://github.com/NasPilot/shellcrash/blob/master/README_CN.md"
 	$echo  "\033[33m使用其他安装源重新安装！\033[0m" 
 }
 #安装及初始化
