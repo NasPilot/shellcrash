@@ -1,0 +1,47 @@
+name: Build Image         # workflow名称，可以在Github项目主页的【Actions】中看到所有的workflow
+on:                       # 配置触发workflow的事件
+  workflow_dispatch: {}   # 开启手动触发工作流
+  push:
+    paths-ignore:         # 排除路径
+      - '.github/**'
+      - '**.md'
+    branches:             # main分支有push时触发此workflow
+      - 'main'
+    tags:                 # tag更新时触发此workflow
+      - '*'
+jobs:                     # workflow中的job
+  build:                  # job的名字
+    runs-on: ubuntu-latest                                      # job运行的基础环境
+    name: Publish ShellCrash Package job
+    if: startsWith(github.repository, 'NasPilot/shellcrash')    # 仓库名
+    timeout-minutes: 30                                         # 添加超时设置
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}              # DockerHub 的用户名
+          password: ${{ secrets.DOCKER_PASSWORD }}              # DockerHub 的Token
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4                       # 执行docker镜像生成并推送到DockerHub
+        if: startsWith(github.repository, 'NasPilot/shellcrash')
+        with:
+          context: .
+          file: ./Dockerfile                                    # Dockerfile文件的名称
+          platforms: linux/amd64,linux/arm64                    # Docker准备构建的镜像平台
+          push: true
+          tags: naspilot/shellcrash:beta                        # Docker镜像标签
+          cache-from: type=registry,ref=naspilot/shellcrash:buildcache  # 启用缓存
+          cache-to: type=registry,ref=naspilot/shellcrash:buildcache,mode=max
+          provenance: false                                     # 关闭 provenance 以减少构建时间
+          outputs: type=registry                                # 优化输出设置

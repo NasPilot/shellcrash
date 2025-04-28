@@ -1,0 +1,81 @@
+FROM alpine:latest
+
+# 作者信息
+LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ"
+LABEL version="1.9.1"
+
+# 工作目录和环境变量设置
+WORKDIR /root
+ENV TZ=Asia/Shanghai \
+    ENV="/etc/profile"
+
+# 复制启动脚本到/root目录
+COPY ./crash /root
+
+# 安装必要的软件包并配置
+RUN set -ex \
+    && apk add --no-cache --update curl wget nftables tzdata ca-certificates bash \
+    && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
+    && echo ${TZ} > /etc/timezone \
+    && apk del tzdata \
+    && export url='https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master' \
+    && wget -q --no-check-certificate -O /tmp/install.sh $url/install.sh \
+    && chmod +x /tmp/install.sh \
+    && timeout 300 bash -c '\ #  第一个安装步骤（ install.sh ）中的选项：
+        (echo "1"; sleep 5; \ # - "1" 安装ShellCrash
+         echo "2"; sleep 5; \ # - "2" 选择稳定版
+         echo "1"; sleep 5; \ # - "1" 在 /etc 目录下安装
+         echo "1"; sleep 5) | sh /tmp/install.sh \ # - "1" 确认安装
+        ' \
+    && source /etc/profile &> /dev/null \
+    && timeout 300 bash -c '\ # 第二个配置步骤（ menu.sh ）中的选项：
+        (echo "正在执行第二个配置步骤..." && \
+         echo "2"; sleep 5; \ # - "2" 选择 Linux 设备配置
+         echo "正在选择Linux设备配置..." && \
+         echo "1"; sleep 5; \ # - "1" 确认自动任务
+         echo "正在确认自动任务..." && \
+         echo "1"; sleep 5; \ # - "1" 现在开始导入？(1/0)
+         echo "正在开始导入..." && \
+         echo "2"; sleep 5; \ # - "2" 在线生成clash配置文件
+         echo "正在准备生成配置文件..." && \
+         echo "https://raw.githubusercontent.com/NasPilot/shellcrash/stable/config.yaml"; sleep 5; \ # 输入配置文件链接
+         echo "正在输入配置文件链接..." && \
+         echo "1"; sleep 5; \ # - "1" 开始生成配置文件
+         echo "正在生成配置文件..." && \
+         echo "1"; sleep 5; \ # - "1" 立即启动服务？(1/0)
+         echo "正在准备启动服务..." && \
+         echo "1"; sleep 5; \ # - "1" 确认选项
+         echo "1"; sleep 5; \ # - "1" 确认选项
+         echo "正在进入更新/卸载菜单..." && \
+         echo "9"; sleep 5; \ # - "9" 进入更新/卸载
+         echo "正在切换安装源..." && \
+         echo "4"; sleep 5; \ # - "4" 切换安装源
+         echo "正在选择meta内核..." && \
+         echo "3"; sleep 5; \ # - "3" 选择meta内核
+         echo "正在返回上级菜单..." && \
+         echo "0"; sleep 5; \ # - "0" 返回上级菜单
+         echo "1"; sleep 5; \ # - "1" 确认选项
+         echo "正在进入内核设置..." && \
+         echo "2"; sleep 5; \ # - "2" 进入内核设置
+         echo "正在切换meta内核..." && \
+         echo "7"; sleep 5; \ # - "7" 切换meta内核
+         echo "正在切换安装源..." && \
+         echo "4"; sleep 5; \ # - "4" 切换安装源
+         echo "1"; sleep 5; \ # - "1" 确认选项
+         echo "正在退出配置..." && \
+         echo "0") | /etc/ShellCrash/menu.sh \ # - "0" 退出配置
+        ' \
+    && rm -rf /tmp/* /var/cache/apk/* /var/tmp/* \
+    && [ -f /etc/ShellCrash/menu.sh ] || exit 1
+
+# 设置挂载点（声明但此时还未挂载）
+VOLUME /etc/ShellCrash
+
+# 备份初始配置（此时备份的是完整的安装配置）
+RUN cp -r /etc/ShellCrash /etc/ShellCrash_bak
+
+# 端口映射
+EXPOSE 7890 9999
+
+# 启动命令
+ENTRYPOINT ["sh","shellcrash.sh"]
