@@ -28,13 +28,14 @@ RUN set -ex && chmod +x /root/shellcrash.sh \
     && (echo "1"; sleep 1; echo "2"; sleep 3; echo "1"; sleep 1; echo "1") | sh install.sh \
     # 配置ShellCrash
     && source /etc/profile &> /dev/null \
-    && (echo "1"; sleep 2; \
-        echo "2"; sleep 4; \
+    && (echo "2"; sleep 2; \
+        echo "1"; sleep 4; \
         echo "1"; sleep 2; \
         echo "2"; sleep 2; \
         echo "1"; sleep 2; \
         echo "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"; sleep 4; \
         echo "1"; sleep 4; \
+        echo "1"; sleep 5; \
         echo "0") | /etc/ShellCrash/menu.sh \
     && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash \
     && rm -rf /tmp/* /var/cache/apk/*
