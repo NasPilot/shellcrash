@@ -44,6 +44,8 @@ docker run -dit \
 --network bridge \
 --restart always \
 --cap-add NET_ADMIN \
+--cap-add NET_RAW \
+--cap-add SYS_ADMIN \
 -p 7890:7890 \
 -p 9999:9999 \
 -v /volume1/docker/shellcrash:/etc/ShellCrash \

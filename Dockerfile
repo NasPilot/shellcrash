@@ -36,10 +36,9 @@ RUN set -ex && chmod +x /root/shellcrash.sh \
         echo "1"; sleep 2; \
         echo "2"; sleep 2; \
         echo "1"; sleep 2; \
-        echo "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"; sleep 4; \
+        echo "https://dler.cloud/subscribe/P4CSfWkhxly39oBmZLcqtOHz?clash=smart&lv=3"; sleep 4; \
         echo "1"; sleep 4; \
-        echo "0"; sleep 1; \
-        echo "1") | /etc/ShellCrash/menu.sh \
+        echo "0") | /etc/ShellCrash/menu.sh \
     && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash \
     && rm -rf /tmp/* /var/cache/apk/*
 
