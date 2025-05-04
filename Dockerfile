@@ -23,6 +23,9 @@ RUN set -ex && chmod +x /root/shellcrash.sh \
     && apk add --no-cache curl wget nftables tzdata \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone && apk del tzdata \
+    && mkdir -p /etc/nftables \
+    && touch /etc/nftables/nftables.conf \
+    && echo "flush ruleset" > /etc/nftables/nftables.conf \
     # 安装ShellCrash
     && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
     && (echo "1"; sleep 1; echo "2"; sleep 3; echo "1"; sleep 1; echo "1") | sh install.sh \
