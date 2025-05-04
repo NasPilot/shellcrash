@@ -27,7 +27,7 @@ RUN set -ex && chmod +x /root/shellcrash.sh \
     && touch /etc/nftables/nftables.conf \
     && echo "flush ruleset" > /etc/nftables/nftables.conf \
     # 安装ShellCrash
-    && wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
+    && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
     && (echo "1"; sleep 1; echo "2"; sleep 3; echo "1"; sleep 1; echo "1") | sh install.sh \
     # 配置ShellCrash
     && source /etc/profile &> /dev/null \
@@ -41,7 +41,7 @@ RUN set -ex && chmod +x /root/shellcrash.sh \
         echo "1"; sleep 4; \
         echo "0") | /etc/ShellCrash/menu.sh \
     # 配置内核功能和面板
-    && printf "9\n2\n3\n4\n3\n0\n2\n1\n1\n7\n4\n0\n2\n2\n0\n1\n" | /etc/ShellCrash/menu.sh \
+    && printf "9\n2\n3\n4\n3\n0\n2\n1\n1\n7\n4\n0\n2\n2\n0" | /etc/ShellCrash/menu.sh \
     && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash \
     && rm -rf /tmp/* /var/cache/apk/*
 
