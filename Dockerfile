@@ -39,6 +39,8 @@ RUN set -ex && chmod +x /root/shellcrash.sh \
         echo "https://dler.cloud/subscribe/P4CSfWkhxly39oBmZLcqtOHz?clash=smart&lv=3"; sleep 4; \
         echo "1"; sleep 4; \
         echo "0") | /etc/ShellCrash/menu.sh \
+    # 配置内核功能和面板
+    && printf "9\n2\n3\n4\n3\n0\n2\n1\n1\n7\n4\n0\n2\n2\n0\n1\n" | /etc/ShellCrash/menu.sh \
     && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash \
     && rm -rf /tmp/* /var/cache/apk/*
 
