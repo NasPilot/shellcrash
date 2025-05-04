@@ -20,17 +20,18 @@ COPY shellcrash.sh /root/shellcrash.sh
 
 # 安装软件
 RUN set -ex && chmod +x /root/shellcrash.sh \
-    && apk add --no-cache curl wget nftables tzdata \
+    && apk add --no-cache curl wget nftables tzdata ca-certificates \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone && apk del tzdata \
     && mkdir -p /etc/nftables \
     && touch /etc/nftables/nftables.conf \
     && echo "flush ruleset" > /etc/nftables/nftables.conf \
     # 安装ShellCrash
-    && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
+    && wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
     && (echo "1"; sleep 1; echo "2"; sleep 3; echo "1"; sleep 1; echo "1") | sh install.sh \
     # 配置ShellCrash
     && source /etc/profile &> /dev/null \
+    && until wget -q --spider https://github.com/NasPilot/shellcrash/raw/main/config.yaml; do sleep 5; done \
     && (echo "2"; sleep 2; \
         echo "1"; sleep 4; \
         echo "1"; sleep 2; \
