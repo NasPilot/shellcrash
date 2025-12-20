@@ -1,10 +1,10 @@
 #!/bin/sh
-source /etc/profile
+. /etc/profile
 
 # 检测并补全文件
 if [ -z "$(ls -A /etc/ShellCrash)" ] || [ ! -f "/etc/ShellCrash/start.sh" ]; then
-    # 如果文件夹为空或缺少关键文件，从备份中复制
-    cp -rL /etc/ShellCrash_bak/* /etc/ShellCrash/
+    # 如果文件夹为空，则运行指定命令
+    cp -rL /etc/ShellCrash_bak/* /etc/ShellCrash
 fi
 
 # 启动服务
