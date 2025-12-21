@@ -18,6 +18,7 @@ RUN ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime && \
 WORKDIR /build
 
 # Install ShellCrash
+RUN curl -fsSL "https://raw.githubusercontent.com/juewuy/ShellCrash/master/ShellCrash.tar.gz" -o ShellCrash.tar.gz
 RUN set -eux; \
     mkdir -p /tmp/SC_tmp; \
     tar -zxf ShellCrash.tar.gz -C /tmp/SC_tmp; \
