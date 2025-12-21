@@ -13,12 +13,12 @@ WORKDIR /root
 
 # 复制文件并执行所有安装配置
 COPY shellcrash.sh /root/shellcrash.sh
-RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates \
+RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone \
     && apk del tzdata && chmod +x /root/shellcrash.sh \
     # 安装ShellCrash
     && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
-    && (echo "1"; sleep 2; echo "1"; sleep 1; echo "1"; sleep 1; echo "1") | sh install.sh \
+    && (echo "1"; sleep 2; echo "1"; sleep 1; echo "1"; sleep 2; echo "1") | sh install.sh \
     # 配置ShellCrash
     && source /etc/profile &> /dev/null \
     && (echo "2"; sleep 2; \
