@@ -1,0 +1,6 @@
+#!/command/with-contenv sh
+
+# 启动服务
+/etc/ShellCrash/start.sh start
+
+echo "ShellCrash service started by s6-overlay."
