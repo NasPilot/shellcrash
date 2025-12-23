@@ -30,7 +30,7 @@ RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash
         echo "1"; sleep 4; \
         echo "0") | /etc/ShellCrash/menu.sh \
     # 配置内核功能和面板
-    && printf "9\n2\n1\n9\n4\n1\n0\n2\n1\n1\n7\n4\n0\n2\n3\n0" | /etc/ShellCrash/menu.sh \
+    && printf "9\n2\n1\n9\n4\n1\n0\n2\n1\n1\n7\n4\n0\n2\n3\n0\n1" | /etc/ShellCrash/menu.sh \
     && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash \
     && rm -rf /tmp/* /var/cache/apk/*
 
