@@ -26,11 +26,11 @@ RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash
         echo "1"; sleep 2; \
         echo "2"; sleep 2; \
         echo "1"; sleep 2; \
-        echo "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"; sleep 4; \
+        echo "https://github.com/NasPilot/shellcrash/raw/main/config.json"; sleep 4; \
         echo "1"; sleep 4; \
         echo "0") | /etc/ShellCrash/menu.sh \
     # 配置内核功能和面板
-    && printf "9\n2\n1\n9\n4\n1\n0\n2\n1\n1\n7\n4\n0\n2\n3\n0" | /etc/ShellCrash/menu.sh \
+    && printf "9\n2\n2\n9\n4\n1\n0\n2\n1\n1\n7\n4\n0\n2\n3\n0" | /etc/ShellCrash/menu.sh \
     && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash \
     && rm -rf /tmp/* /var/cache/apk/*
 
