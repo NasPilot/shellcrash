@@ -2,7 +2,7 @@
 FROM alpine:latest
 
 # 作者信息
-LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ" version="1.9.3"
+LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ" version="1.9.3pre3"
 
 # 环境变量
 ENV TZ=Asia/Shanghai \
@@ -18,9 +18,9 @@ RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash
     && apk del tzdata && chmod +x /root/shellcrash.sh \
     # 安装ShellCrash
     && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
-    && (echo "1"; sleep 2; echo "1"; sleep 1; echo "1"; sleep 2; echo "1") | sh install.sh \
+    && (echo "1"; sleep 1; echo "1"; sleep 3; echo "1"; sleep 2; echo "1") | sh install.sh \
     # 配置ShellCrash
-    && . /etc/profile &> /dev/null \
+    # && . /etc/profile &> /dev/null \ # 该命令会导致脚本重复执行，因此注释掉
     && (echo "2"; sleep 2; \
         echo "1"; sleep 4; \
         echo "1"; sleep 2; \
