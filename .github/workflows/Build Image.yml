@@ -47,16 +47,8 @@ jobs:                     # workflow中的job
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
+          pull: true
+          provenance: false
           tags: |
             naspilot/shellcrash:${{ env.SHELLCRASH_VERSION }}
             naspilot/shellcrash:latest
-          provenance: false
-          outputs: type=registry
-          no-cache: false
-          pull: true
-          # 启用详细构建日志
-          build-args: |
-            BUILDKIT_STEP_LOG_MAX_SIZE=10000000
-            BUILDKIT_STEP_LOG_MAX_SPEED=10000000
-            DOCKER_BUILDKIT=1
-            BUILDKIT_PROGRESS=plain
