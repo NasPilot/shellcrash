@@ -1,10 +1,15 @@
 #!/bin/sh
+. /etc/profile
 
-# 在后台启动 s6-overlay 服务扫描
-# s6-svscan 会监控 /etc/s6-overlay/s6-rc.d 目录并启动所有服务
-echo "Starting s6-overlay services in background..."
-/bin/s6-svscan /etc/s6-overlay/s6-rc.d &
+# 检测并补全文件
+if [ -z "$(ls -A /etc/ShellCrash)" ] || [ ! -f "/etc/ShellCrash/start.sh" ]; then
+    # 如果文件夹为空，则运行指定命令
+    cp -rL /etc/ShellCrash_bak/* /etc/ShellCrash
+fi
 
-# 在前台执行一个交互式 shell，作为容器的主进程
-# 当你从 Docker UI 连接时，你将连接到这个 shell
-exec /bin/sh
+# 启动服务
+/etc/ShellCrash/start.sh start 2>/dev/null
+echo "ShellCrash启动成功，请进入容器，输入crash进行管理！"
+
+# 保持容器运行
+exec sh

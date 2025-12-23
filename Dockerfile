@@ -20,7 +20,7 @@ RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash
     && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
     && (echo "1"; sleep 1; echo "1"; sleep 3; echo "1"; sleep 2; echo "1") | sh install.sh \
     # 配置ShellCrash
-    ##&& . /etc/profile &> /dev/null \
+    ##&& . /etc/profile >/dev/null 2>&1 \
     && (echo "2"; sleep 2; \
         echo "1"; sleep 4; \
         echo "1"; sleep 2; \
