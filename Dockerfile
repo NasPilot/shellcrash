@@ -7,7 +7,7 @@ LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ" version="1.9.3"
 # 环境变量
 ENV TZ="Asia/Shanghai" \
     ENV="/etc/profile" \
-    URL="https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@master"
+    URL="https://raw.githubusercontent.com/juewuy/ShellCrash/stable"
 
 # 工作目录
 WORKDIR /root
@@ -18,10 +18,10 @@ RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone \
     && apk del tzdata && chmod +x /root/shellcrash.sh \
     # 安装ShellCrash
-    && wget -q --no-check-certificate -O /tmp/install.sh ${URL}/install.sh  \
+    && wget -q --no-check-certificate -O /tmp/install.sh ${URL}/install.sh  && bash /tmp/install.sh && source /etc/profile &> /dev/null \
+    ## && wget https://raw.githubusercontent.com/juewuy/ShellCrash/stable/install.sh \
     && (echo "1"; sleep 1; echo "1"; sleep 3; echo "1"; sleep 2; echo "1") | sh install.sh \
     # 配置ShellCrash 切换稳定版及Github直连源 更新面板和内核
-    ##&& . /etc/profile >/dev/null 2>&1 \
     && (echo "2"; sleep 2; \
         echo "1"; sleep 2; \
         echo "9"; sleep 3; \
