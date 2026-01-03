@@ -17,20 +17,25 @@ RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone \
     && apk del tzdata && chmod +x /root/shellcrash.sh \
     # 安装ShellCrash
-    && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
-    && (echo "2"; sleep 1; echo "1"; sleep 3; echo "1"; sleep 2; echo "1") | sh install.sh \
-    # 配置ShellCrash
+    && wget https://raw.githubusercontent.com/juewuy/ShellCrash/stable/install.sh \
+    && (echo "1"; sleep 1; echo "1"; sleep 3; echo "1"; sleep 2; echo "1") | sh install.sh \
+    # 配置ShellCrash 切换稳定版及Github直连源 更新面板和内核
     ##&& . /etc/profile >/dev/null 2>&1 \
-    && (echo "2"; sleep 2; \
-        echo "1"; sleep 4; \
-        echo "1"; sleep 2; \
+    && (echo "9"; sleep 3; \
+        echo "7"; sleep 1; \
+        echo "a"; sleep 1; \
         echo "2"; sleep 2; \
-        echo "1"; sleep 2; \
+        echo "4"; sleep 1; \
+        echo "1"; sleep 3; \
+        echo "2"; sleep 2; \
+        echo "1"; sleep 4; \
+        echo "6"; sleep 1; \
+        echo "2"; sleep 1; \
         echo "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"; sleep 4; \
         echo "1"; sleep 4; \
         echo "0") | /etc/ShellCrash/menu.sh \
-    # 配置内核功能和面板
-    && printf "9\n2\n1\n9\n4\n1\n0\n2\n1\n1\n7\n4\n0\n2\n3\n0" | /etc/ShellCrash/menu.sh \
+    # 更新mihomo数据库
+    && printf "9\n3\n3\n5\n0\n0\n0" | /etc/ShellCrash/menu.sh \
     && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash \
     && rm -rf /tmp/* /var/cache/apk/*
 
