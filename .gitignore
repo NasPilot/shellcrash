@@ -6,3 +6,7 @@ config.ori.json
 config.old.json
 .gitignore
 .DS_Store
+手动构建.md
+old/Dockerfile copy
+old/Dockerfile copy1
+old/shellcrash copy.sh

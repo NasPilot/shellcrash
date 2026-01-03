@@ -1,6 +1,4 @@
 #!/bin/sh
-. /etc/profile
-
 # 确保目录存在
 mkdir -p /etc/ShellCrash
 
@@ -9,6 +7,8 @@ if [ -z "$(ls -A /etc/ShellCrash)" ] || [ ! -f "/etc/ShellCrash/start.sh" ]; the
     # 如果文件夹为空或缺少关键文件，从备份中复制
     cp -rL /etc/ShellCrash_bak/* /etc/ShellCrash/
 fi
+
+. /etc/profile
 
 # 启动服务
 /etc/ShellCrash/start.sh start 2>/dev/null
