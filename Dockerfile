@@ -47,7 +47,7 @@ RUN set -ex; \
 
 # 4. 下载配置文件
 RUN mkdir -p ${CRASHDIR}/yamls \
-    && wget -q --no-check-certificate -O ${CRASHDIR}/yamls/config.yaml "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"
+    && wget -q --no-check-certificate -O ${CRASHDIR}/yamls/config.yaml "https://cdn.jsdelivr.net/gh/NasPilot/shellcrash@main/config.yaml"
 
 # 5. 下载数据库文件 (非交互式)
 RUN set -ex \
