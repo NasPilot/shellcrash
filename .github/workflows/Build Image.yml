@@ -52,3 +52,11 @@ jobs:                     # workflow中的job
           tags: |
             naspilot/shellcrash:${{ env.SHELLCRASH_VERSION }}
             naspilot/shellcrash:latest
+          outputs: type=registry
+          no-cache: false
+          # 启用详细构建日志
+          build-args: |
+            BUILDKIT_STEP_LOG_MAX_SIZE=10000000
+            BUILDKIT_STEP_LOG_MAX_SPEED=10000000
+            DOCKER_BUILDKIT=1
+            BUILDKIT_PROGRESS=plain

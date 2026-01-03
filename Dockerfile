@@ -39,4 +39,4 @@ EXPOSE 7890 9999
 VOLUME /etc/ShellCrash
 
 # 启动命令
-ENTRYPOINT ["sh","shellcrash.sh"]
+ENTRYPOINT ["sh","crashrun.sh"]

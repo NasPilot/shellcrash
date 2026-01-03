@@ -10,7 +10,7 @@
       "store_rdrc": true
     },
     "clash_api": {
-      "external_controller": "127.0.0.1:9090",
+      "external_controller": "0.0.0.0:9999",
       "external_ui": "ui",
       "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-no-fonts.zip",
       "default_mode": "Rule"
@@ -69,7 +69,10 @@
   "inbounds": [
     {
       "type": "tun",
-      "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
       "auto_route": true,
       "strict_route": true
     },
@@ -81,228 +84,370 @@
   ],
   "outbounds": [
     {
-      "tag": "Proxy",
-      "type": "selector",
-      "outbounds": [
-        "Auto - UrlTest",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Proxy",
+        "type": "selector",
+        "outbounds": [
+            "Auto - UrlTest",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Domestic",
-      "type": "selector",
-      "outbounds": [
-        "Direct",
-        "Proxy",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Domestic",
+        "type": "selector",
+        "outbounds": [
+            "Direct",
+            "Proxy",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Others",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Others",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "AI Suite",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "AI Suite",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Netflix",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Netflix",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Disney Plus",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Disney Plus",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "YouTube",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "YouTube",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Max",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Max",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Spotify",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Spotify",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Apple",
-      "type": "selector",
-      "outbounds": [
-        "Direct",
-        "Proxy",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Apple",
+        "type": "selector",
+        "outbounds": [
+            "Direct",
+            "Proxy",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Telegram",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Telegram",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "PT",
-      "type": "selector",
-      "outbounds": [
-        "Direct",
-        "Proxy",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "PT",
+        "type": "selector",
+        "outbounds": [
+            "Direct",
+            "Proxy",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Microsoft",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "Microsoft",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "TikTok",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Direct",
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ]
+        "tag": "TikTok",
+        "type": "selector",
+        "outbounds": [
+            "Proxy",
+            "Direct",
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02",
+            "🇺🇸 美国 IEPL 01",
+            "🇺🇸 美国 IEPL 02"
+        ]
     },
     {
-      "tag": "Auto - UrlTest",
-      "type": "urltest",
-      "outbounds": [
-        "🇭🇰 香港 IEPL [01] [Std]",
-        "🇭🇰 香港 IEPL [02] [Std]",
-        "🇨🇳 台湾 IEPL [01] [Std]",
-        "🇸🇬 狮城 IEPL [01] [Std]"
-      ],
-      "url": "http://cp.cloudflare.com/generate_204",
-      "interval": "10m",
-      "tolerance": 50
+        "tag": "Auto - UrlTest",
+        "type": "urltest",
+        "outbounds": [
+            "🇭🇰 香港 IEPL 01",
+            "🇭🇰 香港 IEPL 02",
+            "🇳 台湾 IEPL 01",
+            "🇳 台湾 IEPL 02",
+            "🇸🇬 狮城 IEPL 01",
+            "🇸🇬 狮城 IEPL 02",
+            "🇯🇵 日本 IEPL 01",
+            "🇯🇵 日本 IEPL 02"
+        ],
+        "url": "http://cp.cloudflare.com/generate_204",
+        "interval": "10m",
+        "tolerance": 50
     },
     {
-      "type": "shadowsocks",
-      "tag": "🇭🇰 香港 IEPL [01] [Std]",
-      "server": "iepl.std.hk.3.santanhaihuidashen.org",
-      "server_port": 14999,
-      "method": "2022-blake3-aes-256-gcm",
-      "password": "santanhaihuidashen",
-      "tcp_fast_open": false
+        "type": "shadowsocks",
+        "tag": "🇭🇰 香港 IEPL 01",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 12400,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
     },
     {
-      "type": "shadowsocks",
-      "tag": "🇭🇰 香港 IEPL [02] [Std]",
-      "server": "iepl.std.hk.4.santanhaihuidashen.org",
-      "server_port": 14999,
-      "method": "2022-blake3-aes-256-gcm",
-      "password": "santanhaihuidashen",
-      "tcp_fast_open": false
+        "type": "shadowsocks",
+        "tag": "🇭🇰 香港 IEPL 02",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 12401,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
     },
     {
-      "type": "shadowsocks",
-      "tag": "🇨🇳 台湾 IEPL [01] [Std]",
-      "server": "iepl.std.tw.3.santanhaihuidashen.org",
-      "server_port": 14999,
-      "method": "2022-blake3-aes-256-gcm",
-      "password": "santanhaihuidashen",
-      "tcp_fast_open": false
+        "type": "shadowsocks",
+        "tag": "🇳 台湾 IEPL 01",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 12402,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
     },
     {
-      "type": "shadowsocks",
-      "tag": "🇸🇬 狮城 IEPL [01] [Std]",
-      "server": "iepl.std.sg.3.santanhaihuidashen.org",
-      "server_port": 14999,
-      "method": "2022-blake3-aes-256-gcm",
-      "password": "santanhaihuidashen",
-      "tcp_fast_open": false
+        "type": "shadowsocks",
+        "tag": "🇳 台湾 IEPL 02",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 12407,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
     },
     {
-      "type": "direct",
-      "tag": "Direct"
+        "type": "shadowsocks",
+        "tag": "🇸🇬 狮城 IEPL 01",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 12523,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
+    },
+    {
+        "type": "shadowsocks",
+        "tag": "🇸🇬 狮城 IEPL 02",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 12527,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
+    },
+    {
+        "type": "shadowsocks",
+        "tag": "🇯🇵 日本 IEPL 01",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 14625,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
+    },
+    {
+        "type": "shadowsocks",
+        "tag": "🇯🇵 日本 IEPL 02",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 14628,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
+    },
+    {
+        "type": "shadowsocks",
+        "tag": "🇺🇸 美国 IEPL 01",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 11235,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
+    },
+    {
+        "type": "shadowsocks",
+        "tag": "🇺🇸 美国 IEPL 02",
+        "server": "qdoknf51.pd5i1po231.sbs",
+        "server_port": 13261,
+        "method": "2022-blake3-aes-256-gcm",
+        "password": "mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:5rKY3JcHXdlG3MnN9/T4/7v2BNS9lKWa0khXBxYTXus=",
+        "tcp_fast_open": false
+    },
+    {
+        "type": "direct",
+        "tag": "Direct"
     }
-  ],
-  "route": {
+],
+    "route": {
     "auto_detect_interface": true,
     "final": "Proxy",
     "rules": [
@@ -339,7 +484,10 @@
         "outbound": "Direct"
       },
       {
-        "rule_set": ["geoip-netflix", "geosite-netflix"],
+        "rule_set": [
+          "geoip-netflix",
+          "geosite-netflix"
+        ],
         "outbound": "Netflix"
       },
       {
@@ -355,11 +503,17 @@
         "outbound": "Spotify"
       },
       {
-        "rule_set": ["geoip-apple", "geosite-apple"],
+        "rule_set": [
+          "geoip-apple",
+          "geosite-apple"
+        ],
         "outbound": "Apple"
       },
       {
-        "rule_set": ["geoip-telegram", "geosite-telegram"],
+        "rule_set": [
+          "geoip-telegram",
+          "geosite-telegram"
+        ],
         "outbound": "Telegram"
       },
       {
@@ -391,7 +545,10 @@
         "outbound": "Direct"
       },
       {
-        "rule_set": ["geoip-cn", "geosite-cn"],
+        "rule_set": [
+          "geoip-cn",
+          "geosite-cn"
+        ],
         "outbound": "Domestic"
       },
       {
