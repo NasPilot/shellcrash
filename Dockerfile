@@ -18,7 +18,7 @@ RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash
     && apk del tzdata && chmod +x /root/shellcrash.sh \
     # 安装ShellCrash
     && wget https://raw.githubusercontent.com/juewuy/ShellCrash/master/install.sh \
-    && (echo "1"; sleep 1; echo "1"; sleep 3; echo "1"; sleep 2; echo "1") | sh install.sh \
+    && (echo "2"; sleep 1; echo "1"; sleep 3; echo "1"; sleep 2; echo "1") | sh install.sh \
     # 配置ShellCrash
     ##&& . /etc/profile >/dev/null 2>&1 \
     && (echo "2"; sleep 2; \
@@ -39,4 +39,4 @@ EXPOSE 7890 9999
 VOLUME /etc/ShellCrash
 
 # 启动命令
-ENTRYPOINT ["sh","crashrun.sh"]
+ENTRYPOINT ["sh","shellcrash.sh"]

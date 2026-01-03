@@ -1,18 +1,15 @@
-#!/bin/sh
-. /etc/profile
+#!bin/sh
+source /etc/profile
 
-# 确保目录存在
-mkdir -p /etc/ShellCrash
-
-# 检测并补全文件
-if [ -z "$(ls -A /etc/ShellCrash)" ] || [ ! -f "/etc/ShellCrash/start.sh" ]; then
-    # 如果文件夹为空或缺少关键文件，从备份中复制
-    cp -rL /etc/ShellCrash_bak/* /etc/ShellCrash/
+# 检测/etc/ShellCrash文件夹是否为空
+if [ -z "$(ls -A /etc/ShellCrash)" ]; then
+    # 如果文件夹为空，则运行指定命令
+    cp -rL /etc/ShellCrash_bak/* /etc/ShellCrash
+    /etc/ShellCrash/start.sh start 2>/dev/nul
+    echo "ShellCrash启动成功，请进入容器，输入crash进行管理！"
+else
+    # 如果文件不为空，则运行指定命令
+    /etc/ShellCrash/start.sh start 2>/dev/nul
+    echo "ShellCrash启动成功，请进入容器，输入crash进行管理！"
 fi
-
-# 启动服务
-/etc/ShellCrash/start.sh start 2>/dev/null
-echo "ShellCrash启动成功，请进入容器，输入crash进行管理！"
-
-# 保持容器运行
-tail -f /dev/null
+sh

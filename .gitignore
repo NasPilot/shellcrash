@@ -5,3 +5,4 @@ config.old.yaml
 config.ori.json
 config.old.json
 .gitignore
+.DS_Store
