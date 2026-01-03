@@ -8,7 +8,8 @@ ARG TARGETPLATFORM
 ENV TZ="Asia/Shanghai" \
     CRASHDIR="/etc/ShellCrash" \
     URL="https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@stable" \
-    systype="container"
+    systype="container" \
+    ENV="/etc/profile"
 
 WORKDIR /root
 
