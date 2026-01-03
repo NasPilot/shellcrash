@@ -1,57 +1,70 @@
 # 基础镜像
 FROM alpine:latest
-
 # 作者信息
 LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ" version="1.9.3"
 
-# 环境变量
+# 参数和环境变量
+ARG TARGETPLATFORM
 ENV TZ="Asia/Shanghai" \
-    ENV="/etc/profile" \
+    CRASHDIR="/etc/ShellCrash" \
     URL="https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@stable" \
-    CRASHDIR="/etc/ShellCrash"
+    systype="container"
 
-# 工作目录
 WORKDIR /root
 
-# 复制文件并执行所有安装配置
-COPY shellcrash.sh /root/shellcrash.sh
+# 1. 安装基础依赖
 RUN set -ex \
-    && apk add --no-cache curl wget nftables tzdata ca-certificates bash \
+    && apk add --no-cache curl wget nftables tzdata ca-certificates bash tar \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
-    && apk del tzdata \
-    && chmod +x /root/shellcrash.sh
+    && apk del tzdata
 
-# 安装ShellCrash
-# 注意：
-# 1. 使用 bash 运行 install.sh
-# 2. 预设 CRASHDIR 以跳过目录选择，输入 "1" 确认覆盖，输入 "1" 选择 crash 别名
-# 3. export systype=container 帮助脚本识别容器环境
-RUN wget -q --no-check-certificate -O /tmp/install.sh ${URL}/install.sh \
-    && export systype=container \
-    && (echo "1"; echo "1") | bash /tmp/install.sh \
-    && . /etc/profile \
-    # 配置ShellCrash 切换稳定版及Github直连源 更新面板和内核
-    && (echo "9"; sleep 3; \
-        echo "7"; sleep 1; \
-        echo "a"; sleep 1; \
-        echo "2"; sleep 2; \
-        echo "4"; sleep 1; \
-        echo "1"; sleep 3; \
-        echo "2"; sleep 2; \
-        echo "1"; sleep 4; \
-        echo "6"; sleep 1; \
-        echo "2"; sleep 1; \
-        echo "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"; sleep 4; \
-        echo "1"; sleep 4; \
-        echo "0") | /etc/ShellCrash/menu.sh \
-    && mkdir -p /etc/ShellCrash/ruleset \
+# 2. 安装 ShellCrash 脚本 (非交互式)
+# 直接下载并解压脚本包，替代 install.sh 的交互过程
+RUN set -ex \
+    && mkdir -p ${CRASHDIR} \
+    && wget -q --no-check-certificate -O /tmp/ShellCrash.tar.gz ${URL}/ShellCrash.tar.gz \
+    && tar -zxf /tmp/ShellCrash.tar.gz -C ${CRASHDIR}/ \
+    && rm /tmp/ShellCrash.tar.gz \
+    # 运行初始化脚本
+    && sh ${CRASHDIR}/init.sh \
+    # 创建软链接 (模拟 install.sh 中的 set_alias)
+    && ln -sf ${CRASHDIR}/menu.sh /usr/bin/crash \
+    && chmod +x ${CRASHDIR}/menu.sh ${CRASHDIR}/start.sh
+
+# 3. 下载并安装内核 (非交互式)
+# 根据架构自动选择内核文件，替代 menu.sh 的下载过程
+RUN set -ex; \
+    case "$TARGETPLATFORM" in \
+      "linux/amd64")  K=amd64 ;; \
+      "linux/arm64")  K=arm64 ;; \
+      *) echo "Unsupported platform: $TARGETPLATFORM"; exit 1 ;; \
+    esac; \
+    wget -q --no-check-certificate -O /tmp/CrashCore.tar.gz "https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@update/bin/meta/clash-linux-${K}.tar.gz" \
+    && tar -zxf /tmp/CrashCore.tar.gz -O > ${CRASHDIR}/CrashCore \
+    && chmod +x ${CRASHDIR}/CrashCore \
+    && rm /tmp/CrashCore.tar.gz
+
+# 4. 下载配置文件
+RUN wget -q --no-check-certificate -O ${CRASHDIR}/config.yaml "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"
+
+# 5. 下载数据库文件 (非交互式)
+RUN set -ex \
+    && mkdir -p ${CRASHDIR}/ruleset \
     && wget -q --no-check-certificate -O /tmp/mrs.tar.gz https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@update/bin/geodata/mrs.tar.gz \
-    && tar -zxf /tmp/mrs.tar.gz -C /etc/ShellCrash/ruleset/ \
-    && wget -q --no-check-certificate -O /etc/ShellCrash/Country.mmdb https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@update/bin/geodata/cn_mini.mmdb \
-    && wget -q --no-check-certificate -O /etc/ShellCrash/GeoSite.dat https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@update/bin/geodata/geosite.dat \
-    && mv /etc/ShellCrash /etc/ShellCrash_bak && mkdir /etc/ShellCrash \
-    && rm -rf /tmp/* /var/cache/apk/*
+    && tar -zxf /tmp/mrs.tar.gz -C ${CRASHDIR}/ruleset/ \
+    && wget -q --no-check-certificate -O ${CRASHDIR}/Country.mmdb https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@update/bin/geodata/cn_mini.mmdb \
+    && wget -q --no-check-certificate -O ${CRASHDIR}/GeoSite.dat https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@update/bin/geodata/geosite.dat \
+    && rm -rf /tmp/*
+
+# 6. 备份配置以便启动时恢复
+# shellcrash.sh 启动脚本会检查 /etc/ShellCrash 是否为空，如果为空则从备份恢复
+# 这对于持久化存储挂载非常重要
+RUN mv ${CRASHDIR} /etc/ShellCrash_bak && mkdir ${CRASHDIR}
+
+# 复制启动脚本
+COPY shellcrash.sh /root/shellcrash.sh
+RUN chmod +x /root/shellcrash.sh
 
 # 端口和目录映射
 EXPOSE 7890 9999

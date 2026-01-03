@@ -36,7 +36,7 @@ jobs:                     # workflow中的job
         id: version
         run: |
           # 从Dockerfile的LABEL中提取版本号
-          VERSION=$(grep -oP 'LABEL version="\K[^"]+' Dockerfile || echo "latest")
+          VERSION=$(grep -oP 'LABEL .*version="\K[^"]+' Dockerfile || echo "latest")
           echo "SHELLCRASH_VERSION=${VERSION}" >> $GITHUB_ENV
           echo "Extracted version: ${VERSION}"
 
