@@ -18,11 +18,10 @@ RUN set -ex && apk add --no-cache curl wget nftables tzdata ca-certificates bash
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone \
     && apk del tzdata && chmod +x /root/shellcrash.sh \
     # 安装ShellCrash
-    # 切换到root用户，如果需要密码，请输入密码
-    && sudo -i \
-    && wget -q --no-check-certificate -O /tmp/install.sh ${URL}/install.sh  && bash /tmp/install.sh && source /etc/profile &> /dev/null \
+    && wget -q --no-check-certificate -O /tmp/install.sh ${URL}/install.sh  \
     && (echo "1"; sleep 1; echo "1"; sleep 3; echo "1"; sleep 2; echo "1") | sh install.sh \
     # 配置ShellCrash 切换稳定版及Github直连源 更新面板和内核
+    ##&& . /etc/profile >/dev/null 2>&1 \
     && (echo "2"; sleep 2; \
         echo "1"; sleep 2; \
         echo "9"; sleep 3; \
