@@ -46,7 +46,8 @@ RUN set -ex; \
     && rm /tmp/CrashCore.tar.gz
 
 # 4. 下载配置文件
-RUN wget -q --no-check-certificate -O ${CRASHDIR}/config.yaml "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"
+RUN mkdir -p ${CRASHDIR}/yamls \
+    && wget -q --no-check-certificate -O ${CRASHDIR}/yamls/config.yaml "https://github.com/NasPilot/shellcrash/raw/main/config.yaml"
 
 # 5. 下载数据库文件 (非交互式)
 RUN set -ex \
