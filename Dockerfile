@@ -7,7 +7,7 @@ LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ" version="1.9.3"
 ARG TARGETPLATFORM
 ENV TZ="Asia/Shanghai" \
     CRASHDIR="/etc/ShellCrash" \
-    URL="https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@stable" \
+    URL="https://testingcf.jsdelivr.net/gh/juewuy/ShellCrash@master" \
     systype="container" \
     ENV="/etc/profile"
 
