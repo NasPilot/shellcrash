@@ -1,7 +1,7 @@
 # 基础镜像
 FROM alpine:latest
 # 作者信息
-LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ" version="1.9.3"
+LABEL maintainer="𝑬𝓷𝒅𝒆 ℵ" version="1.9.4"
 
 # 参数和环境变量
 ARG TARGETPLATFORM
@@ -11,6 +11,7 @@ ENV TZ="Asia/Shanghai" \
     systype="container" \
     ENV="/etc/profile"
 
+# 工作目录
 WORKDIR /root
 
 # 1. 安装基础依赖

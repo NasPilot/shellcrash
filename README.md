@@ -49,7 +49,7 @@ docker run -dit \
 -p 7890:7890 \
 -p 9999:9999 \
 -v /volume1/docker/shellcrash:/etc/ShellCrash \
-naspilot/shellcrash:latest
+naspilot/shellcrash:dev
 ```
 ## 注意事项
 1. 挂载路径 /volume1/docker/shellcrash 是针对NAS系统（Synology）的路径格式。如果您在其他系统上运行，需要修改为适合您系统的路径。

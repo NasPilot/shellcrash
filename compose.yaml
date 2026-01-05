@@ -2,7 +2,7 @@
 
 services:
   shellcrash:
-    image: naspilot/shellcrash:latest
+    image: naspilot/shellcrash:dev
     container_name: shellcrash
     hostname: shellcrash
     network_mode: bridge
